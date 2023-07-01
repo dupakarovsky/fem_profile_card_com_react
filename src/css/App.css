@@ -1,0 +1,19 @@
+.full-container {
+   background-color: hsl(0, 0%, 33%);
+   padding: 1rem;
+   border-radius: 10px;
+}
+
+.container {
+   display: flex;
+   gap: 0.5rem;
+}
+
+select,
+button {
+   padding: 0.15rem 0.5rem;
+}
+
+hr {
+   margin-block: 0.5rem;
+}

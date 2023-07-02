@@ -4,6 +4,15 @@ import "./css/App.css";
 const messages = ["Learn react ✅", "Apply for jobs 📖 ", "Profit 🏂"];
 
 function App() {
+   return (
+      <div>
+         <Steps />
+         <Steps />
+      </div>
+   );
+}
+
+function Steps() {
    const [steps, setSteps] = useState(0);
    const [isOpen, setIsOpen] = useState(true);
 
@@ -22,7 +31,7 @@ function App() {
    };
 
    return (
-      <>
+      <div>
          <button className="close" onClick={() => setIsOpen(!isOpen)}>
             {isOpen ? "⮿" : "👁"}
          </button>
@@ -49,7 +58,7 @@ function App() {
                </div>
             </div>
          )}
-      </>
+      </div>
    );
 }
 export default App;

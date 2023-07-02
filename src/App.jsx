@@ -1,70 +1,55 @@
+import { useState } from "react";
 import "./css/App.css";
-import { useState, useEffect } from "react";
 
-const serverUrl = "localhost:1234";
+const messages = ["Learn react ✅", "Apply for jobs 📖 ", "Profit 🏂"];
 
 function App() {
-   const [roomId, setRoomId] = useState("general");
-   const [show, setShow] = useState(false);
+   const [steps, setSteps] = useState(0);
+   const [isOpen, setIsOpen] = useState(true);
 
-   return (
-      <div className="full-container">
-         <div className="container">
-            <label htmlFor="room">Choose the chat room</label>
-            <select name="room" id="room" onChange={(e) => setRoomId(e.target.value)} value={roomId}>
-               <option value="travel">travel</option>
-               <option value="general">general</option>
-               <option value="music">music</option>
-            </select>
-         </div>
-         <button onClick={() => setShow(!show)}>{show ? "Close chat" : "Open chat"}</button>
-         {show && <hr />}
-         {show && <ChatRoom roomId={roomId} />}
-      </div>
-   );
-}
-export default App;
+   const handlePrevious = () => {
+      if (steps > 0)
+         setSteps((currSteps) => {
+            return currSteps - 1;
+         });
+   };
 
-function ChatRoom({ roomId }) {
-   const [message, setMessage] = useState("");
+   const handleNext = () => {
+      if (steps < messages.length - 1)
+         setSteps((currSteps) => {
+            return currSteps + 1;
+         });
+   };
 
-   useEffect(() => {
-      const connection = createConnection(serverUrl, roomId);
-      connection.connect();
-
-      return () => {
-         return connection.disconnect();
-      };
-   }, [roomId]);
-
-   //...
-   function handleSendClick() {
-      sendMessage(message);
-   }
-   // ...
    return (
       <>
-         <h3>Welcome to the travel room!</h3>
-         <div className="container">
-            <input value={message} onChange={(e) => setMessage(e.target.value)} />
-            <button onClick={handleSendClick}>Send</button>
-         </div>
+         <button className="close" onClick={() => setIsOpen(!isOpen)}>
+            {isOpen ? "⮿" : "👁"}
+         </button>
+
+         {isOpen && (
+            <div className={"steps"}>
+               <div className="numbers">
+                  <span className={steps >= 0 ? "active" : ""}>1</span>
+                  <span className={steps >= 1 ? "active" : ""}>2</span>
+                  <span className={steps >= 2 ? "active" : ""}>3</span>
+               </div>
+
+               <div className="message">
+                  Step: {steps + 1} - {messages[steps]}
+               </div>
+
+               <div className="buttons">
+                  <button className="btn" onClick={handlePrevious}>
+                     previous
+                  </button>
+                  <button className="btn" onClick={handleNext}>
+                     next
+                  </button>
+               </div>
+            </div>
+         )}
       </>
    );
 }
-
-function createConnection(serverUrl, roomId) {
-   return {
-      connect() {
-         console.log("✅ Connected to: " + serverUrl + " on the room: " + roomId);
-      },
-
-      disconnect() {
-         console.log("❌ Disconnected from room " + roomId + " on server " + serverUrl);
-      },
-   };
-}
-
-function sendMessage(msg) {
-   console.log("You send:", msg);
-}
+export default App;

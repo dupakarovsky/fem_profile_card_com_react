@@ -6,13 +6,13 @@ const postcssPresetEnv = require("postcss-preset-env");
 const postcssImport = require("postcss-import");
 
 module.exports = {
-   plugins: [
-      postcssImport,
-      autoprefixer,
-      postcssPresetEnv({
-         stage: 0,
-      }),
-      //   postcssJitProps(OpenProps),
-      // cssnano,
-   ],
+    plugins: [
+        postcssImport,
+        autoprefixer,
+        postcssPresetEnv({
+            stage: 0,
+        }),
+        //   postcssJitProps(OpenProps),
+        // cssnano,
+    ],
 };

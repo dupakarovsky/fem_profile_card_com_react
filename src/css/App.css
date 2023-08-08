@@ -1,9 +1,42 @@
+.app {
+    --dark-cyan: 185 75% 39%; /*hsl(185 75% 39%)*/
+    --very-dark-blue: 229 23% 23%; /*hsl(229 23% 23%)*/
+    --dark-gray: 0 0% 59%; /*hsl(0 0% 59%)*/
+    --dark-grayish-blue: 227 10% 46%; /*hsl(227 10% 46%)*/
+    --white: 0 0% 95%; /* hsl(0 0% 95%)*/
+    --black: 0 0% 20%; /* hsl(0 0% 20%)*/
+
+    --card-width: 21rem;
+    --card-height: 24rem;
+
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-columns: repeat(auto-fit, minmax(var(--card-width), 1fr));
+    gap: 1rem;
+    place-items: center;
+
+    min-inline-size: 100%;
+    min-block-size: 100svh;
+    font-family: "Kumbh Sans";
+    background: -500px -500px / 75% no-repeat url("/bg-pattern-top.svg"),
+        750px 500px / 75% no-repeat url("/bg-pattern-bottom.svg");
+    background-color: hsl(var(--dark-cyan));
+}
+
+@media only screen and (width <= 375px) {
+    .app {
+        background: -350px -300px / 150% no-repeat url("/bg-pattern-top.svg"),
+            200px 400px / 200% no-repeat url("/bg-pattern-bottom.svg");
+        background-color: hsl(var(--dark-cyan));
+    }
+}
+
 .card {
     display: grid;
-    grid-template-rows: 18rem 5rem;
+    grid-template-rows: calc(var(--card-height) * 0.8) calc(var(--card-height) * 0.2);
 
-    min-width: 22rem;
-    min-height: 23rem;
+    min-inline-size: var(--card-width);
+    min-block-size: var(--card-height);
     background-color: hsl(var(--white));
     background-image: url("./bg-pattern-card.svg");
     background-repeat: no-repeat no-repeat;
@@ -26,7 +59,7 @@
 .avatar {
     border-radius: 100vw;
     border: 5px solid hsl(var(--white));
-    margin-block-end: 1.25rem;
+    margin-block-end: 1.65rem;
 }
 
 .name-age {

@@ -1,4 +1,5 @@
 import "./css/App.css";
+import { motion, stagger } from "framer-motion";
 
 const data = {
     name: "Victor Crest",
@@ -13,22 +14,26 @@ const data = {
 };
 
 function App() {
-    return <Card data={data} />;
+    return (
+        <div className="app">
+            <Card data={data} />
+        </div>
+    );
 }
 
 function Card({ data }) {
     return (
-        <div className={"card"}>
+        <motion.div className={"card"} initial={{ y: 50, opacity: 0 }} animate={{ y: 0, opacity: 1 }}>
             <CardDetails avatar={data.avatar} name={data.name} age={data.age} location={data.location} />
             <CardSocialList social={data.social} />
-        </div>
+        </motion.div>
     );
 }
 
 function CardDetails({ avatar, name, age, location }) {
     return (
         <div className={"card-details"}>
-            <img className="avatar" src={avatar} alt={name} />
+            <motion.img className="avatar" src={avatar} alt={name} initial={{ scale: 0 }} animate={{ scale: 1 }} />
             <div className={"name-age"}>
                 <h1 className="name">{name}</h1>
                 <h4 className="age">{age}</h4>
@@ -44,13 +49,13 @@ function CardSocialList({ social }) {
     const renderedSocial = [];
     socialMap.forEach((value, key) => {
         renderedSocial.push(
-            <div key={key} className="stats">
+            <motion.li key={key} className="stats" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
                 <p className="stat-value">{numFormat(value)}</p>
                 <h2 className="stat-title">{key}</h2>
-            </div>
+            </motion.li>
         );
     });
-    return <div className="card-social">{renderedSocial}</div>;
+    return <motion.ul className="card-social">{renderedSocial}</motion.ul>;
 }
 
 function numFormat(num) {

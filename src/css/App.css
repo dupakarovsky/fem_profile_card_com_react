@@ -108,6 +108,21 @@
     color: hsl(var(--dark-gray));
 }
 
+.attribution {
+    font-size: 0.85rem;
+    display: flex;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+
+    & a {
+        color: hsl(var(--very-dark-blue));
+    }
+    & span {
+        margin-inline: 0.5rem;
+    }
+}
+
 @media only screen and (width <= 450px) {
     .app {
         --card-width: 21rem;

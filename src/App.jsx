@@ -17,6 +17,7 @@ function App() {
     return (
         <div className="app">
             <Card data={data} />
+            <Atrribution />
         </div>
     );
 }
@@ -88,6 +89,23 @@ function numFormat(num) {
     } else {
         return Math.floor(num / 1000) + "K";
     }
+}
+
+function Atrribution() {
+    return (
+        <div className="attribution">
+            <span>Challenge by</span>
+            <a
+                href="https://www.frontendmentor.io/challenges/profile-card-component-cfArpWshJ"
+                target="_blank"
+                rel="noreferrer"
+            >
+                Frontend Mentor
+            </a>
+            <span>Coded by</span>
+            <a href="https://github.com/dupakarovsky/">Dupakarovsky</a>.
+        </div>
+    );
 }
 
 export default App;

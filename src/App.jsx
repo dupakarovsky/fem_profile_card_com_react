@@ -1,5 +1,5 @@
 import "./css/App.css";
-import { motion, stagger } from "framer-motion";
+import { motion } from "framer-motion";
 
 const data = {
     name: "Victor Crest",
@@ -44,18 +44,40 @@ function CardDetails({ avatar, name, age, location }) {
 }
 
 function CardSocialList({ social }) {
-    const socialMap = new Map(Object.entries(social));
+    const variantParent = {
+        start: { y: 40 },
+        finish: { y: 0, transition: { staggerChildren: 0.15 } },
+    };
 
+    const variantChild = {
+        start: {
+            scale: [0, 0, 0],
+        },
+
+        finish: {
+            scale: [0, 1.25, 1],
+            times: [0, 0.5, 1],
+            transition: {
+                duration: 0.25,
+            },
+        },
+    };
+
+    const socialMap = new Map(Object.entries(social));
     const renderedSocial = [];
     socialMap.forEach((value, key) => {
         renderedSocial.push(
-            <motion.li key={key} className="stats" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+            <motion.li key={key} className="stats" variants={variantChild}>
                 <p className="stat-value">{numFormat(value)}</p>
                 <h2 className="stat-title">{key}</h2>
             </motion.li>
         );
     });
-    return <motion.ul className="card-social">{renderedSocial}</motion.ul>;
+    return (
+        <motion.ul className="card-social" variants={variantParent} initial={"start"} animate={"finish"}>
+            {renderedSocial}
+        </motion.ul>
+    );
 }
 
 function numFormat(num) {
